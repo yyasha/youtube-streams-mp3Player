@@ -4,9 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strings"
 )
 
-var raw_url string = "https://www.youtube.com/watch?v=5qap5aO4i9A"
+// var raw_url string = "https://www.youtube.com/watch?v=5qap5aO4i9A"
+var raw_url string = "https://www.youtube.com/watch?v=1ZuldMGkJNY"
 
 func main() {
 	// fmt.Println(len(os.Args), os.Args[1])
@@ -16,7 +18,7 @@ func main() {
 }
 
 func getYoutubeUrl(raw_url string) string {
-	// youtube-dl -f best --get-url url
+	// get clear url using youtube-dl
 	fmt.Println("executing the command 'youtube-dl -f best --get-url ", raw_url,"'")
 	cmd, err := exec.Command("youtube-dl", "-f", "best", "--get-url", raw_url).Output()
 	if err != nil {
@@ -27,9 +29,14 @@ func getYoutubeUrl(raw_url string) string {
 }
 
 func playMusic(url string) {
-	// ffplay -nodisp url
+	// delete last character from string
+	tmp := strings.Split(url, "")
+	tmp = tmp[:len(tmp)-1] 
+	url = strings.Join(tmp, "")
+
+	// play using ffplay
 	fmt.Println("executing the command 'ffplay -nodisp ", url,"'")
-	err := exec.Command("ffplay", "-nodisp", url).Run()
+	err := exec.Command("ffplay", "-autoexit", "-nodisp", "-hide_banner", "-loglevel", "error", url).Run()
 	if err != nil {
 		log.Println(err)
 	}
