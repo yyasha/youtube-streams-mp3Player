@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os/exec"
@@ -8,10 +9,14 @@ import (
 )
 
 // var raw_url string = "https://www.youtube.com/watch?v=5qap5aO4i9A"
-var raw_url string = "https://www.youtube.com/watch?v=1ZuldMGkJNY"
+// var raw_url string = "https://www.youtube.com/watch?v=xgSKo9xx0E4"
+
+var raw_url string
 
 func main() {
-	// fmt.Println(len(os.Args), os.Args[1])
+	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=xgSKo9xx0E4", "Link to the video on YouTube")
+	flag.Parse()
+	fmt.Println("raw_url:", raw_url)
 	fmt.Println("Start player")
 	var ready_url string = getYoutubeUrl(raw_url)
 	playMusic(ready_url)
