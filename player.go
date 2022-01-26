@@ -15,7 +15,7 @@ var volume_Arg string
 
 func main() {
 	useDisplay := flag.Bool("display", false, "Show display")
-	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=MUHZWjgvM1s", "Link to the video on YouTube")
+	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=5qap5aO4i9A", "Link to the video on YouTube")
 	flag.IntVar(&volume, "volume", 100, "Playback volume")
 	flag.Parse()
 
