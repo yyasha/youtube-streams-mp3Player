@@ -5,17 +5,20 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strconv"
 	"strings"
 )
 
 var raw_url string
+var volume int
+var volume_Arg string
 
 func main() {
 	useDisplay := flag.Bool("display", false, "Show display")
 	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=MUHZWjgvM1s", "Link to the video on YouTube")
+	flag.IntVar(&volume, "volume", 100, "Playback volume")
 	flag.Parse()
 
-	fmt.Println("raw_url:", raw_url)
 	fmt.Println("Start player")
 	var ready_url string = getYoutubeUrl(raw_url)
 	playMusic(ready_url, useDisplay)
@@ -42,9 +45,17 @@ func playMusic(url string, useDisplay *bool) {
 	args := []string{"-autoexit", "-hide_banner", "-loglevel", "error"}
 
 	// setting args
+
+	// display
 	if !*useDisplay {
 		args = append(args, "-nodisp")
 	}
+
+	// volume
+	args = append(args, "-volume")
+	args = append(args, strconv.Itoa(volume))
+
+	// url
 	args = append(args, url)
 
 	err := exec.Command("ffplay", args...).Run()
