@@ -2,6 +2,10 @@ Youtube-streams-mp3Player
 -----------------
 Playing music or other streams in your console
 
+Go installing
+-----------
+Official guide: https://golang.org/doc/install
+
 Building
 ---------------
 ```
