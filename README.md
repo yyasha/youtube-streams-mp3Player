@@ -39,5 +39,5 @@ Example
 ----------------
 Play lofi hip hop at volume 50 without display
 ```
-./player -url "https://www.youtube.com/watch?v=5qap5aO4i9A" -volume 50
+./player -url https://www.youtube.com/watch?v=5qap5aO4i9A -volume 50
 ```
