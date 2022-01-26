@@ -11,7 +11,6 @@ import (
 
 var raw_url string
 var volume int
-var volume_Arg string
 
 func main() {
 	useDisplay := flag.Bool("display", false, "Show display")
