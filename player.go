@@ -8,14 +8,11 @@ import (
 	"strings"
 )
 
-// var raw_url string = "https://www.youtube.com/watch?v=5qap5aO4i9A"
-// var raw_url string = "https://www.youtube.com/watch?v=xgSKo9xx0E4"
-
 var raw_url string
 
 func main() {
-	useDisplay := flag.Bool("display", false, "show display")
-	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=xgSKo9xx0E4", "Link to the video on YouTube")
+	useDisplay := flag.Bool("display", false, "Show display")
+	flag.StringVar(&raw_url, "url", "https://www.youtube.com/watch?v=MUHZWjgvM1s", "Link to the video on YouTube")
 	flag.Parse()
 
 	fmt.Println("raw_url:", raw_url)
@@ -41,24 +38,17 @@ func playMusic(url string, useDisplay *bool) {
 	tmp = tmp[:len(tmp)-1] 
 	url = strings.Join(tmp, "")
 
-	fmt.Println("executing the command 'ffplay -autoexit -nodisp -hide_banner -loglevel error", url,"'")
-
 	// play using ffplay
+	args := []string{"-autoexit", "-hide_banner", "-loglevel", "error"}
 
-	args := []string{"-autoexit", "-hide_banner", "-loglevel", "error", url}
+	// setting args
+	if !*useDisplay {
+		args = append(args, "-nodisp")
+	}
+	args = append(args, url)
+
 	err := exec.Command("ffplay", args...).Run()
 	if err != nil {
 		log.Println(err)
 	}
-	// if *useDisplay {
-	// 	err := exec.Command("ffplay", "-autoexit", "-hide_banner", "-loglevel", "error", url).Run()
-	// 	if err != nil {
-	// 		log.Println(err)
-	// 	}
-	// } else {
-	// 	err := exec.Command("ffplay", "-autoexit", "-nodisp", "-hide_banner", "-loglevel", "error", url).Run() //
-	// 	if err != nil {
-	// 		log.Println(err)
-	// 	}
-	// }
 }
